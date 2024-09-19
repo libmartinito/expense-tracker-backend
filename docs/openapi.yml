@@ -114,7 +114,8 @@ paths:
                 - email
                 - password
       responses:
-        "201":
+        "200":
+          description: User successfully logged in
           content:
             application/json:
               schema:
