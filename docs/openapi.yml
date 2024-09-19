@@ -175,3 +175,27 @@ paths:
                           type: string
                         detail:
                           type: string
+  "/api/v1/logout":
+    post:
+      summary: Logout the user
+      responses:
+        "204":
+          description: User successfully logged out
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        status:
+                          type: string
+                        title:
+                          type: string
+                        detail:
+                          type: string
