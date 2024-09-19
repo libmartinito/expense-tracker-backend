@@ -2,18 +2,34 @@ openapi: 3.1.0
 
 info:
   title: Expense Tracker API
+  description:
+    An API for tracking expenses
+  contact:
+    name: API Support
+    email: lib.martinito@pm.me
   version: 1.0.0
 
+servers:
+  - url: http://localhost:3000/api/v1
+
+tags:
+  - name: Authentication
+    description: Operations related to user authentication and management
+
 paths:
-  "/api/v1/register":
+  "/register":
     post:
+      tags:
+        - Authentication
       summary: Register a new user
+      description: Registers a new account by providing a username, email, password, and password_confirmation.
+      operationId: registerUser
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              type: Object
+              type: object
               properties:
                 username:
                   type: string
@@ -96,15 +112,19 @@ paths:
                           type: string
                         detail:
                           type: string
-  "/api/v1/login":
+  "/login":
     post:
+      tags:
+        - Authentication
       summary: Login an existing user
+      description: Authenticates a user by validating their credentials and returns an access token upon successfull login.
+      operationId: loginUser
       requestBody:
         required: true
         content:
           application/json:
             schema:
-              type: Object
+              type: object
               properties:
                 email:
                   type: string
@@ -175,9 +195,13 @@ paths:
                           type: string
                         detail:
                           type: string
-  "/api/v1/logout":
+  "/logout":
     post:
+      tags:
+        - Authentication
       summary: Logout the user
+      description: Logs out the authenticated user by invalidating their access token.
+      operationId: logoutUser
       responses:
         "204":
           description: User successfully logged out
