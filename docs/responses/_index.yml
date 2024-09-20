@@ -1,0 +1,2 @@
+InternalServerError:
+  $ref: "./internal_server_error.yml"

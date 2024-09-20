@@ -1,0 +1,66 @@
+post:
+  summary: Register a new user
+  description: Registers a new account by providing a username, email, password, and password_confirmation.
+  operationId: registerUser
+  tags:
+    - Authentication
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            username:
+              type: string
+            email:
+              type: string
+            password:
+              type: string
+            password_confirmation:
+              type: string
+          required:
+            - username
+            - email
+            - password
+            - password_confirmation
+  responses:
+    "201":
+      description: User successfully created
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    example: users
+                  id:
+                    type: integer
+                    example: 1
+                  attributes:
+                    type: object
+                    properties:
+                      username:
+                        type: string
+                        example: username
+                      email:
+                        type: string
+                        example: user@example.com
+                      created_at:
+                        type: string
+                        format: date-time
+                      updated_at:
+                        type: string
+                        format: date-time
+    "422":
+      description: Validation error
+      content:
+        application/json:
+          schema:
+            $ref: "../schemas/error.yml"
+    "500":
+      $ref: "../responses/internal_server_error.yml"
