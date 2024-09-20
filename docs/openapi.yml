@@ -15,6 +15,8 @@ servers:
 tags:
   - name: Authentication
     description: Operations related to user authentication and management
+  - name: Expenses
+    description: Operations related to managing expenses
 
 paths:
   "/register":
@@ -23,6 +25,10 @@ paths:
     $ref: "./auth/login.yml"
   "/logout":
     $ref: "./auth/logout.yml"
+  "/expenses":
+    $ref: "./resources/expenses.yml"
+  "/expenses/{expenseId}":
+    $ref: "./resources/expense.yml"
 
 components:
   schemas:
