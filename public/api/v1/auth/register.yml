@@ -57,10 +57,6 @@ post:
                         type: string
                         format: date-time
     "422":
-      description: Validation error
-      content:
-        application/json:
-          schema:
-            $ref: "../schemas/error.yml"
+      $ref: "../responses/unprocessable_entity.yml"
     "500":
       $ref: "../responses/internal_server_error.yml"

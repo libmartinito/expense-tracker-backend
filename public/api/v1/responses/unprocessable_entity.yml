@@ -1,4 +1,4 @@
-description: Internal server error
+description: Unprocessable entity
 content:
   application/json:
     schema:
@@ -11,10 +11,10 @@ content:
             properties:
               status:
                 type: string
-                example: "500"
+                example: "422"
               title:
                 type: string
-                example: "Internal Server Error"
+                example: "Unprocessable Entity"
               detail:
                 type: string
-                example: "An unexpected error occurred while processing your request."
+                example: "The provided data is invalid."

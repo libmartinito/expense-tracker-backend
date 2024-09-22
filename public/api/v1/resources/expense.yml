@@ -16,10 +16,6 @@ delete:
     "204":
       description: Expense deleted successfully
     "404":
-      description: Expense not found
-      content:
-        application/json:
-          schema:
-            $ref: "../schemas/error.yml"
+      $ref: "../responses/not_found.yml"
     "500":
       $ref: "../responses/internal_server_error.yml"

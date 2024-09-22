@@ -45,10 +45,6 @@ post:
                         type: string
                         example: tU9bLuZseefXQ4yQxQo8wjtBvsAfPc78os6R
     "401":
-      description: Invalid credentials
-      content:
-        application/json:
-          schema:
-            $ref: "../schemas/error.yml"
+      $ref: "../responses/invalid_credentials.yml"
     "500":
       $ref: "../responses/internal_server_error.yml"
