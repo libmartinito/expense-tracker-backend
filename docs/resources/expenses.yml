@@ -97,5 +97,44 @@ get:
                   next:
                     type: string
                     example: "/expenses?page[cursor]=10&page[size]=10"
+            example:
+              data:
+                - type: expenses
+                  id: 1
+                  attributes:
+                    item: cheeseburger
+                    amount: 6100
+                    currency: PHP
+                    purchased_at: 2024-09-20
+                    created_at: 2024-09-20
+                    updated_at: 2024-09-20
+                  meta:
+                    cursor: 1
+                - type: expenses
+                  id: 2
+                  attributes:
+                    item: donut
+                    amount: 6500
+                    currency: PHP
+                    purchased_at: 2024-09-20
+                    created_at: 2024-09-20
+                    updated_at: 2024-09-20
+                  meta:
+                    cursor: 2
+                - type: expenses
+                  id: 3
+                  attributes:
+                    item: takoyaki
+                    amount: 6500
+                    currency: PHP
+                    purchased_at: 2024-09-20
+                    created_at: 2024-09-20
+                    updated_at: 2024-09-20
+                  meta:
+                    cursor: 3
+              meta:
+                total: 3
+              links:
+                self: "/expenses?page[cursor]=0&page[size]=10"
     "500":
       $ref: "../responses/internal_server_error.yml"
