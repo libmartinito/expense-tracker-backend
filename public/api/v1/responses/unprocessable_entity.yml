@@ -1,0 +1,20 @@
+description: Unprocessable entity
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              status:
+                type: string
+                example: "422"
+              title:
+                type: string
+                example: "Unprocessable Entity"
+              detail:
+                type: string
+                example: "The provided data is invalid."

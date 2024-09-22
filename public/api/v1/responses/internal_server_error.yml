@@ -1,0 +1,20 @@
+description: Internal server error
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              status:
+                type: string
+                example: "500"
+              title:
+                type: string
+                example: "Internal Server Error"
+              detail:
+                type: string
+                example: "An unexpected error occurred while processing your request."

@@ -1,0 +1,67 @@
+post:
+  summary: Create an expense
+  description: Add a new expense to the system.
+  operationId: createExpense
+  tags:
+    - Expenses
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            item:
+              type: string
+              example: cheeseburger
+            amount:
+              type: integer
+              example: 6100
+            currency:
+              type: string
+              example: PHP
+            purchased_at:
+              type: string
+              example: "2024-09-20"
+          required:
+            - item
+            - amount
+            - currency
+  responses:
+    "201":
+      description: Expense created successfully
+      content:
+        application/json:
+          schema:
+            $ref: "../schemas/expense.yml"
+    "500":
+      $ref: "../responses/internal_server_error.yml"
+
+get:
+  summary: List expenses
+  description: Retrieve a list of expenses with pagination based on record IDs.
+  operationId: listExpenses
+  tags:
+    - Expenses
+  parameters:
+    - name: page[cursor]
+      in: query
+      required: false
+      schema:
+        type: integer
+        example: 1
+    - name: page[size]
+      in: query
+      required: false
+      schema:
+        type: integer
+        example: 10
+  responses:
+    "200":
+      description: A list of expenses
+      content:
+        application/json:
+          schema:
+            $ref: "../schemas/expenses.yml"
+    "500":
+      $ref: "../responses/internal_server_error.yml"

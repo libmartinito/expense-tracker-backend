@@ -1,0 +1,11 @@
+post:
+  summary: Logout the user
+  description: Logs out the authenticated user by invalidating their access token.
+  operationId: logoutUser
+  tags:
+    - Authentication
+  responses:
+    "204":
+      description: User successfully logged out
+    "500":
+      $ref: "../responses/internal_server_error.yml"

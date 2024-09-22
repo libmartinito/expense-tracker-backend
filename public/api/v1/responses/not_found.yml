@@ -1,0 +1,20 @@
+description: Not found
+content:
+  application/json:
+    schema:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              status:
+                type: string
+                example: "404"
+              title:
+                type: string
+                example: "Not Found"
+              detail:
+                type: string
+                example: "The resource with the specified ID is not found."

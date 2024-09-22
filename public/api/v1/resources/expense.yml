@@ -1,0 +1,21 @@
+delete:
+  summary: Delete an expense by ID
+  description: Remove an expense from the system using the record ID.
+  operationId: deleteExpense
+  tags:
+    - Expenses
+  parameters:
+    - name: expenseId
+      in: path
+      required: true
+      description: The record ID of the expense to be deleted.
+      schema:
+        type: integer
+        example: 1
+  responses:
+    "204":
+      description: Expense deleted successfully
+    "404":
+      $ref: "../responses/not_found.yml"
+    "500":
+      $ref: "../responses/internal_server_error.yml"
