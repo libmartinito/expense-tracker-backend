@@ -29,9 +29,3 @@ paths:
     $ref: "./resources/expenses.yml"
   "/expenses/{expenseId}":
     $ref: "./resources/expense.yml"
-
-components:
-  schemas:
-    $ref: "./schemas/_index.yml"
-  responses:
-    $ref: "./responses/_index.yml"

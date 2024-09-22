@@ -1,4 +1,0 @@
-Error:
-  $ref: "./error.yml"
-ExpenseProperties:
-  $ref: "./expense_properties.yml"

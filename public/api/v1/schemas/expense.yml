@@ -1,0 +1,32 @@
+type: object
+properties:
+  data:
+    type: object
+    properties:
+      test:
+        type: string
+        example: expenses
+      id:
+        type: integer
+        example: 1
+      attributes:
+        type: object
+        properties:
+          item:
+            type: string
+            example: cheeseburger
+          amount:
+            type: integer
+            example: 6100
+          currency:
+            type: string
+            example: PHP
+          purchased_at:
+            type: string
+            example: "2024-09-20"
+          created_at:
+            type: string
+            example: "2024-09-20"
+          updated_at:
+            type: string
+            example: "2024-09-20"
