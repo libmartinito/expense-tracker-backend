@@ -15,7 +15,7 @@ properties:
           item:
             type: string
             example: cheeseburger
-          amount:
+          amount_in_cents:
             type: integer
             example: 6100
           currency:
