@@ -37,7 +37,7 @@ post:
                 properties:
                   type:
                     type: string
-                    example: users
+                    example: user
                   id:
                     type: integer
                     example: 1
