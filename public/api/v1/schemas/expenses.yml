@@ -7,7 +7,7 @@ properties:
       properties:
         test:
           type: string
-          example: expenses
+          example: expense
         id:
           type: integer
           example: 1
@@ -35,30 +35,24 @@ properties:
               type: string
               format: date
               example: "2024-09-20"
-        meta:
-          type: object
-          properties:
-            cursor:
-              type: integer
-              example: 1
-  meta:
-    type: object
-    properties:
-      total:
-        type: integer
-        example: 100
   links:
     type: object
     properties:
-      self:
+      first:
         type: string
-        example: "/expenses?page[cursor]=1&page[size]=10"
+        example: "/expenses?page[cursor]=0&page[size]=10"
+      last:
+        type: string
+        example: "/expenses?page[cursor]=20&page[size]=10"
+      prev:
+        type: string
+        example: "/expenses?page[cursor]=0&page[size]=10"
       next:
         type: string
         example: "/expenses?page[cursor]=10&page[size]=10"
 example:
   data:
-    - type: expenses
+    - type: expense
       id: 1
       attributes:
         item: cheeseburger
@@ -67,9 +61,7 @@ example:
         purchased_at: "2024-09-20"
         created_at: "2024-09-20"
         updated_at: "2024-09-20"
-      meta:
-        cursor: 1
-    - type: expenses
+    - type: expense
       id: 2
       attributes:
         item: donut
@@ -78,9 +70,7 @@ example:
         purchased_at: "2024-09-20"
         created_at: "2024-09-20"
         updated_at: "2024-09-20"
-      meta:
-        cursor: 2
-    - type: expenses
+    - type: expense
       id: 3
       attributes:
         item: takoyaki
@@ -89,9 +79,8 @@ example:
         purchased_at: "2024-09-20"
         created_at: "2024-09-20"
         updated_at: "2024-09-20"
-      meta:
-        cursor: 3
-  meta:
-    total: 3
   links:
-    self: "/expenses?page[cursor]=0&page[size]=10"
+    first: "/expenses?page[cursor]=0&page[size]=10"
+    last: "/expenses?page[cursor]=0&page[size]=10"
+    prev: "null"
+    next: "null"

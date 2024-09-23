@@ -5,7 +5,7 @@ properties:
     properties:
       test:
         type: string
-        example: expenses
+        example: expense
       id:
         type: integer
         example: 1
