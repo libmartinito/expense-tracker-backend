@@ -67,4 +67,54 @@ class V1::ExpensesControllerTest < ActionDispatch::IntegrationTest
     assert_response :unauthorized
     assert_equal 0, Expense.count
   end
+
+  test "should list expenses" do
+    user = users(:one)
+
+    post v1_login_path, params: {
+      user: {
+        email: user.email,
+        password: "password"
+      }
+    }
+
+    assert_response :success
+
+    post v1_expenses_path, headers: {
+      "Authorization": user.auth_token
+    }, params: {
+      expense: {
+        item: "croissant",
+        amount_in_cents: 12500,
+        currency: "PHP",
+        purchased_at: Time.now
+      }
+    }
+
+    assert_response :created
+
+    post v1_expenses_path, headers: {
+      "Authorization": user.auth_token
+    }, params: {
+      expense: {
+        item: "cream puff",
+        amount_in_cents: 16000,
+        currency: "PHP",
+        purchased_at: Time.now
+      }
+    }
+
+    assert_response :created
+
+    get v1_expenses_path, headers: { "Authorization": user.auth_token }
+
+    assert_response :success
+    assert_equal 2, JSON.parse(response.body).dig("data").length
+  end
+
+  test "should not list expenses if not authenticated" do
+    get v1_expenses_path
+
+    assert_response :unauthorized
+  end
 end
