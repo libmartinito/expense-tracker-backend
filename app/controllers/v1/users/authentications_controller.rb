@@ -1,6 +1,6 @@
 module V1
   class Users::AuthenticationsController < ApplicationController
-    skip_before_action :authenticate_request
+    skip_before_action :authenticate_request, only: [ :create ]
 
     def create
       user = User.find_by(email: params.dig(:user, :email))
