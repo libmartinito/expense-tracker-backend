@@ -6,7 +6,7 @@ module V1
       user = User.new(user_params)
 
       if user.save
-        render json: { message: "User created successfully", data: user }, status: :created
+        render json: UserSerializer.new(user).serializable_hash.to_json, status: :created
       else
         render json: { message: "User not created", errors: user.errors }, status: :unprocessable_entity
       end
