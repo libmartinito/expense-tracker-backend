@@ -9,4 +9,10 @@ Rails.application.routes.draw do
   # root "posts#index"
 
   get "/api/:version/docs", to: "api_docs#index"
+
+  namespace :v1 do
+    post "register", to: "users/registrations#create"
+    post "login", to: "users/authentications#create"
+    post "logout", to: "users/authentications#destroy"
+  end
 end
