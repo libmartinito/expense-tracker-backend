@@ -7,7 +7,7 @@ class V1::Users::RegistrationsController < ApplicationController
     if user.save
       render json: UserSerializer.new(user).serializable_hash.to_json, status: :created
     else
-      render json: { message: "User not created", errors: user.errors }, status: :unprocessable_entity
+      raise CustomError.new(:unprocessable_entity, "422", "Unprocessable Entity", "User not created")
     end
   end
 

@@ -7,7 +7,7 @@ class V1::Users::AuthenticationsController < ApplicationController
     if user&.authenticate(params.dig(:user, :password))
       render json: AuthenticationSerializer.new(user).serializable_hash.to_json, status: :ok
     else
-      render json: { errors: "Invalid email or password" }, status: :unauthorized
+      raise CustomError.new(:unauthorized, "401", "Unauthorized", "Invalid email or password")
     end
   end
 

@@ -5,7 +5,7 @@ class V1::ExpensesController < ApplicationController
     if expense.save
       render json: ExpenseSerializer.new(expense).serializable_hash.to_json, status: :created
     else
-      render json: { message: "Expense not created", errors: expense.errors }, status: :unprocessable_entity
+      raise CustomError.new(:unprocessable_entity, "422", "Unprocessable Entity", "Expense not created")
     end
   end
 
@@ -16,7 +16,7 @@ class V1::ExpensesController < ApplicationController
       expense.destroy
       render json: {}, status: :no_content
     else
-      render json: { message: "Expense not found", errors: expense.errors }, status: :not_found
+      raise CustomError.new(:not_found, "404", "Not Found", "Expense not found")
     end
   end
 
