@@ -39,10 +39,10 @@ class V1::ExpensesController < ApplicationController
         years: Current.user.expenses.select("strftime('%Y', purchased_at) as year").distinct.map(&:year)
       },
       links: {
-        first: "http://localhost:3001/expenses?page=1&per_page=#{per_page}",
-        last: "http://localhost:3001/expenses?page=#{expenses.total_pages}&per_page=#{per_page}",
-        prev: expenses.prev_page ? "http://localhost:3001/expenses?page=#{expenses.prev_page}&per_page=#{per_page}" : nil,
-        next: expenses.next_page ? "http://localhost:3001/expenses?page=#{expenses.next_page}&per_page=#{per_page}" : nil
+        first: "#{ENV["FRONTEND_URL"]}/expenses?page=1&per_page=#{per_page}",
+        last: "#{ENV["FRONTEND_URL"]}/expenses?page=#{expenses.total_pages}&per_page=#{per_page}",
+        prev: expenses.prev_page ? "#{ENV["FRONTEND_URL"]}/expenses?page=#{expenses.prev_page}&per_page=#{per_page}" : nil,
+        next: expenses.next_page ? "#{ENV["FRONTEND_URL"]}/expenses?page=#{expenses.next_page}&per_page=#{per_page}" : nil
       }
     }).serializable_hash, status: :ok
   end
