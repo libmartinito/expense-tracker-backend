@@ -117,4 +117,42 @@ class V1::ExpensesControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :unauthorized
   end
+
+  test "should destroy expense" do
+    user = users(:one)
+
+    post v1_login_path, params: {
+      user: {
+        email: user.email,
+        password: "password"
+      }
+    }
+
+    assert_response :success
+
+    post v1_expenses_path, headers: {
+      "Authorization": user.auth_token
+    }, params: {
+      expense: {
+        item: "croissant",
+        amount_in_cents: 12500,
+        currency: "PHP",
+        purchased_at: Time.now
+      }
+    }
+
+    assert_response :created
+
+    delete v1_expense_path(JSON.parse(response.body).dig("data", "id")), headers: {
+      "Authorization": user.auth_token
+    }
+
+    assert_response :no_content
+  end
+
+  test "should not destroy expense if not authenticated" do
+    delete v1_expense_path(1)
+
+    assert_response :unauthorized
+  end
 end

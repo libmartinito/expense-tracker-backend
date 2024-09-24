@@ -9,6 +9,17 @@ class V1::ExpensesController < ApplicationController
     end
   end
 
+  def destroy
+    expense = Current.user.expenses.find(params[:id])
+
+    if expense
+      expense.destroy
+      render json: {}, status: :no_content
+    else
+      render json: { message: "Expense not found", errors: expense.errors }, status: :not_found
+    end
+  end
+
   def index
     page = params[:page] || 1
     per_page = params[:per_page] || 10

@@ -15,6 +15,6 @@ Rails.application.routes.draw do
     post "login", to: "users/authentications#create"
     post "logout", to: "users/authentications#destroy"
 
-    resources :expenses, only: [ :index, :create ]
+    resources :expenses, only: [ :index, :create, :destroy ]
   end
 end
