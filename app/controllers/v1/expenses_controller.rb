@@ -10,25 +10,19 @@ class V1::ExpensesController < ApplicationController
   end
 
   def index
-    page_size = (params.dig(:page, :size) || 10).to_i
-    page_cursor = (params.dig(:page, :cursor) || 0).to_i
-
-    expenses = Current.user.expenses.where("id > ?", page_cursor).limit(page_size)
-    total = Current.user.expenses.count
-
-    last_cursor = total > 0 ? [ (total / page_size) * page_size, total ].min : nil
-
-    first_link = "http://localhost:3000/v1/expenses?page[cursor]=0&page[size]=#{page_size}"
-    last_link = last_cursor ? "http://localhost:3000/v1/expenses?page[cursor]=#{last_cursor}&page[size]=#{page_size}" : nil
-    prev_link = !expenses.empty? && expenses.first.id != 1 ? "http://localhost:3000/v1/expenses?page[cursor]=#{expenses.first.id - 1}&page[size]=#{page_size}" : nil
-    next_link = !expenses.empty? && expenses.last.id != total ? "http://localhost:3000/v1/expenses?page[cursor]=#{expenses.last.id}&page[size]=#{page_size}" : nil
+    page = params[:page] || 1
+    per_page = params[:per_page] || 10
+    expenses = Current.user.expenses.page(page).per(per_page)
 
     render json: ExpenseSerializer.new(expenses, {
+      meta: {
+        total: expenses.total_pages
+      },
       links: {
-        first: first_link,
-        last: last_link,
-        prev: prev_link,
-        next: next_link
+        first: "http://localhost:3001/expenses?page=1&per_page=#{per_page}",
+        last: "http://localhost:3001/expenses?page=#{expenses.total_pages}&per_page=#{per_page}",
+        prev: expenses.prev_page ? "http://localhost:3001/expenses?page=#{expenses.prev_page}&per_page=#{per_page}" : nil,
+        next: expenses.next_page ? "http://localhost:3001/expenses?page=#{expenses.next_page}&per_page=#{per_page}" : nil
       }
     }).serializable_hash, status: :ok
   end
