@@ -1,0 +1,50 @@
+get:
+  summary: Get a user by ID
+  description: Get a user from the system using the record ID.
+  operationId: getUser
+  tags:
+    - User
+  parameters:
+    - name: userId
+      in: path
+      required: true
+      description: The record ID of the user to be fetched.
+      schema:
+        type: integer
+        example: 1
+  responses:
+    "200":
+      description: User fetched
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: object
+                properties:
+                  type:
+                    type: string
+                    example: user
+                  id:
+                    type: integer
+                    example: 1
+                  attributes:
+                    type: object
+                    properties:
+                      username:
+                        type: string
+                        example: username
+                      email:
+                        type: string
+                        example: user@example.com
+                      created_at:
+                        type: string
+                        format: date-time
+                      updated_at:
+                        type: string
+                        format: date-time
+    "404":
+      $ref: "../responses/not_found.yml"
+    "500":
+      $ref: "../responses/internal_server_error.yml"

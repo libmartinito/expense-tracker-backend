@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
 
-  get "/api/:version/docs", to: "api_docs#index"
+  get "/:version/docs", to: "api_docs#index"
 
   namespace :v1 do
     post "register", to: "users/registrations#create"
@@ -16,5 +16,6 @@ Rails.application.routes.draw do
     post "logout", to: "users/authentications#destroy"
 
     resources :expenses, only: [ :index, :create, :destroy ]
+    resources :users, only: [ :show ]
   end
 end

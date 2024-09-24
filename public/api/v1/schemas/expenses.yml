@@ -35,6 +35,18 @@ properties:
               type: string
               format: date
               example: "2024-09-20"
+  meta:
+    total:
+      type: number
+      example: 1
+    total_amount_in_cents:
+      type: number
+      example: 6100
+    years:
+      type: array
+      items:
+        type: number
+        example: 2024
   links:
     type: object
     properties:
@@ -79,8 +91,12 @@ example:
         purchased_at: "2024-09-20"
         created_at: "2024-09-20"
         updated_at: "2024-09-20"
+  meta:
+    total: 1
+    total_amount_in_cents: 19100
+    years: [2024]
   links:
-    first: "/expenses?page[cursor]=0&page[size]=10"
-    last: "/expenses?page[cursor]=0&page[size]=10"
+    first: "http://localhost:3001/expenses?page=1&per_page=10"
+    last: "http://localhost:3001/expenses?page=1&per_page=10"
     prev: "null"
     next: "null"
