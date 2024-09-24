@@ -12,11 +12,18 @@ class V1::ExpensesController < ApplicationController
   def index
     page = params[:page] || 1
     per_page = params[:per_page] || 10
-    expenses = Current.user.expenses.page(page).per(per_page)
+    expenses = Current.user.expenses
+
+    if params[:month].present? && params[:year].present?
+      expenses = expenses.where("strftime('%m', purchased_at) = ? and strftime('%Y', purchased_at) = ?", params[:month], params[:year])
+    end
+
+    expenses = expenses.page(page).per(per_page)
 
     render json: ExpenseSerializer.new(expenses, {
       meta: {
-        total: expenses.total_pages
+        total: expenses.total_pages,
+        years: Current.user.expenses.select("strftime('%Y', purchased_at) as year").distinct.map(&:year)
       },
       links: {
         first: "http://localhost:3001/expenses?page=1&per_page=#{per_page}",
