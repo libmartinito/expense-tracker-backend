@@ -10,13 +10,15 @@ info:
   version: 1.0.0
 
 servers:
-  - url: http://localhost:3000/api/v1
+  - url: http://localhost:3000/v1
 
 tags:
   - name: Authentication
     description: Operations related to user authentication and management
   - name: Expenses
     description: Operations related to managing expenses
+  - name: User
+    description: Operations related to managing users
 
 paths:
   "/register":
@@ -29,3 +31,5 @@ paths:
     $ref: "./resources/expenses.yml"
   "/expenses/{expenseId}":
     $ref: "./resources/expense.yml"
+  "/users/{userId}":
+    $ref: "./resources/user.yml"
