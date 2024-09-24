@@ -18,11 +18,13 @@ class V1::ExpensesController < ApplicationController
       expenses = expenses.where("strftime('%m', purchased_at) = ? and strftime('%Y', purchased_at) = ?", params[:month], params[:year])
     end
 
+    total_amount_in_cents = expenses.sum(:amount_in_cents)
     expenses = expenses.page(page).per(per_page)
 
     render json: ExpenseSerializer.new(expenses, {
       meta: {
         total: expenses.total_pages,
+        total_amount_in_cents: total_amount_in_cents,
         years: Current.user.expenses.select("strftime('%Y', purchased_at) as year").distinct.map(&:year)
       },
       links: {
