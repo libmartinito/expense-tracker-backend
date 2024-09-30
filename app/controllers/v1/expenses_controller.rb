@@ -26,7 +26,7 @@ class V1::ExpensesController < ApplicationController
     expenses = Current.user.expenses
 
     if params[:month].present? && params[:year].present?
-      expenses = expenses.where("strftime('%m', purchased_at) = ? and strftime('%Y', purchased_at) = ?", params[:month], params[:year])
+      expenses = expenses.where("strftime('%m', purchased_at) = ? and strftime('%Y', purchased_at) = ?", params[:month], params[:year]).order(purchased_at: :desc)
     end
 
     total_amount_in_cents = expenses.sum(:amount_in_cents)
