@@ -47,15 +47,31 @@ get:
     - name: page
       in: query
       required: false
+      description: The page desired in a paginated request.
       schema:
         type: integer
         example: 1
     - name: per_page
       in: query
       required: false
+      description: The number of records in a paginated request.
       schema:
         type: integer
         example: 10
+    - name: month
+      in: query
+      required: false
+      description: The filter for returning an expense with a given month. This should be used with the year query.
+      schema:
+        type: string
+        example: "09"
+    - name: year
+      in: query
+      required: false
+      description: The filter for returning an expense with a given year. This should be used with the month query.
+      schema:
+        type: integer
+        example: 2024
   responses:
     "200":
       description: A list of expenses
