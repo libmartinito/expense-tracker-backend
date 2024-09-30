@@ -25,6 +25,10 @@ class V1::ExpensesController < ApplicationController
     per_page = params[:per_page] || 10
     expenses = Current.user.expenses
 
+    if page.to_i > (expenses.count / 10.0).ceil
+      page = (expenses.count / 10.0).ceil
+    end
+
     if params[:month].present? && params[:year].present?
       expenses = expenses.where("strftime('%m', purchased_at) = ? and strftime('%Y', purchased_at) = ?", params[:month], params[:year]).order(purchased_at: :desc)
     end
