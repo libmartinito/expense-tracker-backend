@@ -34,7 +34,8 @@ class V1::ExpensesController < ApplicationController
 
     render json: ExpenseSerializer.new(expenses, {
       meta: {
-        total: expenses.total_pages,
+        current_page: expenses.current_page,
+        total_pages: expenses.total_pages,
         total_amount_in_cents: total_amount_in_cents,
         years: Current.user.expenses.select("strftime('%Y', purchased_at) as year").distinct.map(&:year)
       },
