@@ -1,24 +1,29 @@
-# README
+# Expense Tracker Backend
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Getting Started
 
-Things you may want to cover:
+- Clone the directory and install dependencies
 
-* Ruby version
+```
+git clone https://github.com/libmartinito/expense-tracker-backend.git && cd expense-tracker-backend && bundle i
+```
 
-* System dependencies
+- Run migrations
 
-* Configuration
+```
+rails db:migrate
+```
 
-* Database creation
+- Make a new .env file from .env.example
 
-* Database initialization
+```
+cp .env.example .env
+```
 
-* How to run the test suite
+- Start the dev server
 
-* Services (job queues, cache servers, search engines, etc.)
+```
+rails s
+```
 
-* Deployment instructions
-
-* ...
+Open swagger docs [here](http://localhost:3000/v1/docs).
